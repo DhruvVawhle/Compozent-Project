@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>Weather App</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <div class="search-input-container"> 
+                <input type="text" id="cityInput" placeholder="Search for cities" onkeypress="if(event.key === 'Enter') document.getElementById('searchButton').click();">
+                <button id="searchButton"><i class="fas fa-search"></i></button> 
+            </div>
+        </div>
+
+        <div id="loadingSpinner" class="loading-spinner" style="display: none;"></div>
+
+        <div class="weather-info" id="weatherInfo" style="display: none;"> 
+            <div class="city">
+                <h2><span id="cityName"></span></h2>
+                <p>Chance of rain: <span id="rainChance"></span>%</p>
+            </div>
+
+            <div class="current-weather">
+                <div class="temp">
+                    <h1><span id="temperatureC"></span>°C / <span id="temperatureF"></span>°F</h1>
+                </div>
+                <img id="weatherIcon" src="" alt="Weather Icon">
+            </div>
+        </div>
+
+        <!-- 5-Day Forecast Section -->
+        <div class="forecast" id="forecast" style="display: none;">
+            <div class="day-container" id="dayContainer">
+                <!-- Forecast cards will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Air Quality Conditions Section -->
+        <div class="air-conditions" id="airQuality" style="display: none;">
+            <h2>Air Quality Conditions</h2>
+            <div class="condition">
+                <p>Air Quality Index (AQI): <span id="airQualityIndex">--</span></p>
+            </div>
+            <div class="condition">
+                <p>Pollution (PM10): <span id="pollutionIndex">--</span></p>
+            </div>
+        </div>
+
+        <!-- About Us Section -->
+        <div id="about" class="about-us">
+            <h2>About Us</h2>
+            <p>Welcome to the Weather App! Our goal is to provide real-time weather data and forecasts to help you plan your day. With easy-to-use interfaces, we give you the latest information on temperature, air conditions, and more. Powered by OpenWeatherMap, we strive to keep you informed, wherever you go.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Weather App</p> 
+        <p>Powered by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></p>
+        <p>A simple weather application for learning purposes.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
