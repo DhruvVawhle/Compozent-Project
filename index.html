@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -26,25 +29,25 @@
 
     <div class="container">
         <div class="search-bar">
-            <div class="search-input-container"> 
+            <div class="search-input-container">
                 <input type="text" id="cityInput" placeholder="Search for cities" onkeypress="if(event.key === 'Enter') document.getElementById('searchButton').click();">
-                <button id="searchButton"><i class="fas fa-search"></i></button> 
+                <button id="searchButton"><i class="fas fa-search"></i></button>
             </div>
         </div>
 
         <div id="loadingSpinner" class="loading-spinner" style="display: none;"></div>
 
-        <div class="weather-info" id="weatherInfo" style="display: none;"> 
+        <div class="weather-info" id="weatherInfo" style="display: none;">
             <div class="city">
                 <h2><span id="cityName"></span></h2>
-                <p>Chance of rain: <span id="rainChance"></span>%</p>
+                <p>Weather Conditions: <span id="rainChance"></span></p>
             </div>
 
             <div class="current-weather">
                 <div class="temp">
                     <h1><span id="temperatureC"></span>°C / <span id="temperatureF"></span>°F</h1>
                 </div>
-                <img id="weatherIcon" src="" alt="Weather Icon">
+                <img id="weatherIcon" src="" alt="Weather Icon" class="weather-icon-colored">
             </div>
         </div>
 
@@ -55,7 +58,6 @@
             </div>
         </div>
 
-        <!-- Air Quality Conditions Section -->
         <div class="air-conditions" id="airQuality" style="display: none;">
             <h2>Air Quality Conditions</h2>
             <div class="condition">
@@ -63,6 +65,13 @@
             </div>
             <div class="condition">
                 <p>Pollution (PM10): <span id="pollutionIndex">--</span></p>
+            </div>
+            <div class="condition">
+                <p>Chance of Rain: <span id="rainChanceAirQuality">--</span></p>
+            </div>
+            <!-- Chance of Rain (Added Below AQI) -->
+            <div class="condition">
+                <p>Rain Probability: <span id="rainProbability">--</span></p>
             </div>
         </div>
 
@@ -75,11 +84,12 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Weather App</p> 
+        <p>&copy; 2025 Weather App</p>
         <p>Powered by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap</a></p>
         <p>A simple weather application for learning purposes.</p>
     </footer>
 
     <script src="script.js"></script>
+
 </body>
 </html>
