@@ -100,6 +100,10 @@ header nav ul li a:hover {
     margin-top: 20px;
 }
 
+.colored-icon {
+    filter: hue-rotate(180deg) brightness(1.5);
+}
+
 .city {
     text-align: left;
 }
