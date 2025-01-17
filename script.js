@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const airQualitySection = document.getElementById("airQuality");
     const forecastSection = document.getElementById("forecast");
 
+    // Indian city names
+    const cityList = [
+        "Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata", "Hyderabad", "Ahmedabad", "Pune", "Surat", "Jaipur", 
+        "Lucknow", "Kanpur", "Nagpur", "Indore", "Patna", "Vadodara"
+    ];
+
     // Function to fetch current weather data
     const fetchWeather = async (city) => {
         if (!city) {
@@ -67,6 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
         document.getElementById("weatherInfo").style.display = "flex";
 
+        // Check for rain in the current weather data
+        const rainData = data.rain ? data.rain["1h"] : 0; // Check for rain in the past 1 hour
+        const rainChance = rainData ? `${rainData} mm` : "No rain in the past hour"; // Display rain amount or no rain message
+        document.getElementById("rainChanceAirQuality").textContent = rainChance; // Display the rain information in AQI section
+
         // Hide "About Us" section after weather data is displayed
         aboutSection.style.display = "none";
     };
@@ -96,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Display AQI and PM10 values
         document.getElementById("airQualityIndex").textContent = data.main.aqi || "Not Available";
         document.getElementById("pollutionIndex").textContent = data.components.pm10 || "Not Available";
+        
         airQualitySection.style.display = "block";  // Show the air quality section
     };
 
@@ -126,6 +138,26 @@ document.addEventListener("DOMContentLoaded", () => {
         forecastSection.style.display = "block";  // Show the forecast section
     };
 
+    // Function to setup auto-suggest for cities
+    const setupAutoSuggest = () => {
+        $(cityInput).autocomplete({
+            source: cityList,
+            minLength: 2,
+            select: function(event, ui) {
+                cityInput.value = ui.item.value;
+                searchButton.click();
+                // Optionally clear input after selection
+                cityInput.value = '';
+            },
+            focus: function(event, ui) {
+                return false; // Prevent auto-filling input field
+            }
+        }).on('autocompleteopen', function() {
+            // Prevent the suggestion dropdown from being too close to the input field
+            $(this).autocomplete("widget").css("z-index", 1000);
+        });
+    };
+
     // Event listener for the search button
     searchButton.addEventListener("click", () => {
         const city = cityInput.value.trim();
@@ -139,4 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fetchWeather(city);
         }
     });
+
+    // Initialize auto-suggest
+    setupAutoSuggest();
 });
